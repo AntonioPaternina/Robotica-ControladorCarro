@@ -13,8 +13,14 @@ void setup() {
   pinMode(PIN_DIR_B, OUTPUT);
   pinMode(PIN_BRAKE_A, OUTPUT);
   pinMode(PIN_BRAKE_B, OUTPUT);
+
+  Serial.begin(9600);
 }
 
 void loop() {
-  analogWrite(PIN_PWM_A, 100);
+  int pmw;
+  if (Serial.available() > 0) {
+    pmw = Serial.parseInt();
+  }
+  analogWrite(PIN_PWM_A, pmw);
 }
